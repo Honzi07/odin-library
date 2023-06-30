@@ -1,0 +1,25 @@
+* {
+  outline: red solid 1px;
+}
+
+.book-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100vh;
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: aquamarine;
+  border-radius: 8px;
+  width: 200px;
+  height: 300px;
+}
+
+.book-title {
+  margin: 30px;
+}
