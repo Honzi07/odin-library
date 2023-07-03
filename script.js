@@ -2,6 +2,7 @@
 
 const bookContainer = document.querySelector('.book-container');
 const buttonCreate = document.querySelector('#button-create');
+let dataIndex = 0;
 
 const myLibrary = [];
 
@@ -30,7 +31,6 @@ function createBook() {
 }
 buttonCreate.addEventListener('click', createBook);
 
-let dataIndex = 0;
 function showsBookOnPage() {
   const lastBook = myLibrary.slice(-1);
   console.log(lastBook);
@@ -58,14 +58,28 @@ function showsBookOnPage() {
   }
 }
 
-function removeBook(e) {
+function getBookIndex(e) {
   const button = e.target;
   const bookCard = button.closest('.book-card');
   const bookIndex = bookCard.dataset.index;
   console.log(bookIndex);
+  return bookIndex;
+}
+
+function removeBook(e) {
+  const button = e.target;
+  const bookCard = button.closest('.book-card');
+  const bookIndex = bookCard.dataset.index;
+
+  console.log(bookIndex);
   myLibrary.splice(bookIndex, 1);
   console.log(myLibrary);
   bookCard.remove();
+
+  dataIndex = 0;
+  document.querySelectorAll('.book-card').forEach(el => {
+    el.dataset.index = dataIndex++;
+  });
 }
 
 bookContainer.addEventListener('click', function (e) {
