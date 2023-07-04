@@ -27,13 +27,17 @@ function createBook() {
   const book = new Book(title, author, +pages, comment, read);
   myLibrary.push(book);
   console.log(...myLibrary);
-  showsBookOnPage();
+  renderBook();
 }
 buttonCreate.addEventListener('click', createBook);
 
-function showsBookOnPage() {
+Book.prototype.toggleReadStatus = function () {
+  this.read = !this.read;
+};
+
+function renderBook() {
   const lastBook = myLibrary.slice(-1);
-  console.log(lastBook);
+  console.log(...lastBook);
 
   for (const el of lastBook) {
     const html = `
@@ -44,31 +48,45 @@ function showsBookOnPage() {
           <li class="book-details-author">Author: ${el.author}</li>
           <li class="book-details-pages">Pages: ${el.pages}</li>
           <li class="book-details-comment">Comment: ${el.comment}</li>
-          <li class="book-details-read">${
-            el.read ? 'I already read it' : 'I need to read it'
-          }</li>
+          <li class="book-details-read">
+          <span>
+          ${el.read ? 'I already read it' : 'I need to read it'}
+          </span>
+          <input type="checkbox" name="read" class="toggle-read-status" />
+          </li>
           <li>
           <input type="button" class="button-remove" value="remove " />
         </li>
         </ul>
       </div>
     </div>
-`;
+    `;
     bookContainer.insertAdjacentHTML('beforeend', html);
   }
 }
 
-function getBookIndex(e) {
-  const button = e.target;
-  const bookCard = button.closest('.book-card');
+function getElement(e) {
+  const element = e.target;
+  const bookElement = element.closest('.book-card');
+  return bookElement;
+}
+
+function readStatus(e) {
+  const bookCard = getElement(e);
   const bookIndex = bookCard.dataset.index;
-  console.log(bookIndex);
-  return bookIndex;
+  const book = myLibrary[bookIndex];
+  const span = bookCard.querySelector('li span');
+
+  if (book.read) {
+    span.textContent = 'I need to read it';
+  } else span.textContent = 'I already read it';
+
+  book.toggleReadStatus();
+  console.log(book.read, span);
 }
 
 function removeBook(e) {
-  const button = e.target;
-  const bookCard = button.closest('.book-card');
+  const bookCard = getElement(e);
   const bookIndex = bookCard.dataset.index;
 
   console.log(bookIndex);
@@ -83,7 +101,22 @@ function removeBook(e) {
 }
 
 bookContainer.addEventListener('click', function (e) {
+  getElement(e);
+
   if (e.target.classList.contains('button-remove')) {
     removeBook(e);
   }
 });
+
+bookContainer.addEventListener('change', function (e) {
+  if (e.target.classList.contains('toggle-read-status')) {
+    readStatus(e);
+  }
+});
+
+document.addEventListener('click', function (e) {
+  // console.log(e.target.dataset.index);
+  console.dir(e.target);
+});
+
+console.log(document.querySelectorAll('.book-details-read'));
