@@ -121,6 +121,27 @@ fieldset > ul {
   font-weight: 500;
 }
 
+.book-form input:focus {
+  outline: none;
+  background-color: var(--secondary-color-light);
+}
+
+#title + span {
+  position: relative;
+}
+
+#title:invalid + span::before {
+  position: absolute;
+  right: 0px;
+  bottom: 40px;
+  content: 'required';
+  font-size: 0.8rem;
+}
+
+#title:invalid {
+  border-color: #bf0000;
+}
+
 .book-container {
   display: grid;
   grid-gap: 40px;

@@ -1,8 +1,9 @@
 'use strict';
 
 const bookContainer = document.querySelector('.book-container');
-const buttonCreate = document.querySelector('#add-book');
+const bookForm = document.querySelector('.book-form');
 const bookFormContainer = document.querySelector('.book-form-container');
+const buttonCreate = document.querySelector('#add-book');
 let dataIndex = 0;
 
 const myLibrary = [];
@@ -15,11 +16,8 @@ function Book(title, author, pages, comment, read) {
   this.read = read;
 }
 
-function createBook() {
-  document.querySelector('.book-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-  });
-
+function createBook(e) {
+  e.preventDefault();
   const [title, author, pages, comment] = [
     ...document.querySelectorAll('.book-form input'),
   ].map(input => input.value);
@@ -30,7 +28,7 @@ function createBook() {
   console.log(...myLibrary);
   renderBook();
 }
-buttonCreate.addEventListener('click', createBook);
+bookForm.addEventListener('submit', createBook);
 
 Book.prototype.toggleReadStatus = function () {
   this.read = !this.read;
