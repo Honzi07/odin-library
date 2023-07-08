@@ -4,11 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
+    <header>
+      <div>
+        <a href="https://www.theodinproject.com">
+          <img src="odin-lined.png" alt="the odin project logo" />
+        </a>
+        <h1>Odin Library</h1>
+      </div>
+      <button type="button" class="open-form">Create Book</button>
+    </header>
     <div class="book-container">
       <div class="book-card">
         <h2 class="book-title">Test</h2>
@@ -18,10 +33,13 @@
             <li class="book-details-pages">pages</li>
             <li class="book-details-comment">comment</li>
             <li class="book-details-read">readed</li>
-            <!-- <li class="book-details-checkbox">
-              <label for="read">Read</label>
-              <input type="checkbox" name="read" id="read" />
-            </li> -->
+            <li class="book-details-checkbox">
+              <span class="read-text"
+                >${ el.read ? 'I already read it' : 'I need to read it'
+                ggggggggggggggggggggggggggggggggggggggggggggg }</span
+              >
+              <input type="checkbox" name="read" class="toggle-read-status" />
+            </li>
             <li>
               <input type="button" class="button-remove" value="remove " />
             </li>
@@ -30,12 +48,13 @@
       </div>
     </div>
 
-    <div>
+    <div class="book-form-container">
       <form class="book-form">
+        <button class="close-form" type="button">Close</button>
         <ul>
           <li>
             <label for="title">Title:</label>
-            <input type="text" name="title" id="title" value="test" />
+            <input type="text" name="title" id="title" value="test" required />
           </li>
           <li>
             <label for="author">Author:</label>
@@ -60,7 +79,8 @@
             <input type="checkbox" name="read" id="read" />
           </li>
           <li>
-            <input type="submit" value="Add Book" id="button-create" />
+            <button id="add-book" type="submit">Add Book</button>
+            <!-- <input type="submit" value="Add Book" id="button-create" /> -->
           </li>
         </ul>
       </form>

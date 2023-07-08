@@ -1,7 +1,8 @@
 'use strict';
 
 const bookContainer = document.querySelector('.book-container');
-const buttonCreate = document.querySelector('#button-create');
+const buttonCreate = document.querySelector('#add-book');
+const bookFormContainer = document.querySelector('.book-form-container');
 let dataIndex = 0;
 
 const myLibrary = [];
@@ -65,14 +66,14 @@ function renderBook() {
   }
 }
 
-function getElement(e) {
+function getTargetElement(e) {
   const element = e.target;
   const bookElement = element.closest('.book-card');
   return bookElement;
 }
 
 function readStatus(e) {
-  const bookCard = getElement(e);
+  const bookCard = getTargetElement(e);
   const bookIndex = bookCard.dataset.index;
   const book = myLibrary[bookIndex];
   const span = bookCard.querySelector('li span');
@@ -86,7 +87,7 @@ function readStatus(e) {
 }
 
 function removeBook(e) {
-  const bookCard = getElement(e);
+  const bookCard = getTargetElement(e);
   const bookIndex = bookCard.dataset.index;
 
   console.log(bookIndex);
@@ -101,7 +102,7 @@ function removeBook(e) {
 }
 
 bookContainer.addEventListener('click', function (e) {
-  getElement(e);
+  getTargetElement(e);
 
   if (e.target.classList.contains('button-remove')) {
     removeBook(e);
@@ -114,9 +115,16 @@ bookContainer.addEventListener('change', function (e) {
   }
 });
 
-document.addEventListener('click', function (e) {
-  // console.log(e.target.dataset.index);
-  console.dir(e.target);
+document.querySelector('.open-form').addEventListener('click', function () {
+  bookFormContainer.style.display = 'block';
 });
 
-console.log(document.querySelectorAll('.book-details-read'));
+document.querySelector('.close-form').addEventListener('click', function () {
+  bookFormContainer.style.display = 'none';
+});
+
+window.addEventListener('click', function (e) {
+  if (e.target === bookFormContainer) {
+    bookFormContainer.style.display = 'none';
+  }
+});
