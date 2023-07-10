@@ -26,24 +26,41 @@
     </header>
     <div class="book-container">
       <div class="book-card">
-        <h2 class="book-title">Test</h2>
-        <div class="book-details">
-          <ul>
-            <li class="book-details-author">author</li>
-            <li class="book-details-pages">pages</li>
-            <li class="book-details-comment">comment</li>
-            <li class="book-details-read">readed</li>
-            <li class="book-details-checkbox">
-              <span class="read-text"
-                >${ el.read ? 'I already read it' : 'I need to read it'
-                ggggggggggggggggggggggggggggggggggggggggggggg }</span
-              >
-              <input type="checkbox" name="read" class="toggle-read-status" />
-            </li>
-            <li>
-              <input type="button" class="button-remove" value="remove " />
-            </li>
-          </ul>
+        <button class="button-remove" style="border: none; background: none">
+          <svg
+            class="button-remove"
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41z"
+            />
+          </svg>
+        </button>
+        <div class="book-details-container">
+          <h2 class="book-title">Test</h2>
+          <div class="book-details">
+            <ul>
+              <li class="book-details-author">author</li>
+              <li class="book-details-pages">pages</li>
+              <li class="book-details-comment">
+                <p>
+                  Comment: jo konyv555 5555555555555555555555 55555555555555566
+                </p>
+              </li>
+              <li class="book-details-read">readed</li>
+              <li class="book-details-checkbox">
+                <span class="read-text">I need to read it</span>
+                <input type="checkbox" name="read" class="toggle-read-status" />
+              </li>
+              <li>
+                <input type="button" class="button-remove" value="remove " />
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -76,8 +93,9 @@
             />
           </li>
           <li>
-            <label for="read">Read</label>
-            <input type="checkbox" name="read" id="read" />
+            <label for="read"
+              >Did you read it? <input type="checkbox" name="read" id="read"
+            /></label>
           </li>
           <li>
             <button id="add-book" type="submit">Add Book</button>
