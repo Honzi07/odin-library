@@ -38,29 +38,52 @@ function renderBook() {
   const lastBook = myLibrary.slice(-1);
   console.log(...lastBook);
 
+  const bookCard = document.createElement('div');
+  bookCard.classList.add('book-card');
+  bookCard.dataset.index = dataIndex++;
+  bookContainer.appendChild(bookCard);
+
   for (const el of lastBook) {
     const html = `
-    <div class="book-card" data-index="${dataIndex++}">
-      <h2 class="book-title">${el.title}</h2>
-      <div class="book-details">
-        <ul>
-          <li class="book-details-author">Author: ${el.author}</li>
-          <li class="book-details-pages">Pages: ${el.pages}</li>
-          <li class="book-details-comment">Comment: ${el.comment}</li>
-          <li class="book-details-read">
-          <span>
-          ${el.read ? 'I already read it' : 'I need to read it'}
-          </span>
-          <input type="checkbox" name="read" class="toggle-read-status" />
-          </li>
-          <li>
-          <input type="button" class="button-remove" value="remove " />
-        </li>
-        </ul>
-      </div>
-    </div>
+        <button class="button-remove" style="border: none; background: none">
+          <svg
+            class="button-remove"
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41z"
+            />
+          </svg>
+        </button>
+        <h2 class="book-title">${el.title}</h2>
+        <div class="book-details">
+          <ul>
+            <li class="book-details-author">Author: ${el.author}</li>
+            <li class="book-details-pages">Pages: ${el.pages}</li>
+            <li class="book-details-comment">Comment: ${el.comment}</li>
+            <li class="book-details-read">
+            <span>
+            ${el.read ? 'I already read it' : 'I need to read it'}
+            </span>
+            <input type="checkbox" name="read" class="toggle-read-status" ${
+              el.read ? 'checked' : ''
+            }/>
+            </li>
+          </ul>
+        </div>
     `;
-    bookContainer.insertAdjacentHTML('beforeend', html);
+
+    if (el.read) {
+      bookCard.classList.add('readed');
+    } else {
+      bookCard.classList.add('not-readed');
+    }
+
+    bookCard.insertAdjacentHTML('beforeend', html);
   }
 }
 
@@ -78,7 +101,13 @@ function readStatus(e) {
 
   if (book.read) {
     span.textContent = 'I need to read it';
-  } else span.textContent = 'I already read it';
+    bookCard.classList.add('not-readed');
+    bookCard.classList.remove('readed');
+  } else {
+    span.textContent = 'I already read it';
+    bookCard.classList.add('readed');
+    bookCard.classList.remove('not-readed');
+  }
 
   book.toggleReadStatus();
   console.log(book.read, span);
