@@ -54,7 +54,7 @@ input[type='checkbox'] {
   width: 20px;
   height: 20px;
   background-color: var(--bg-color);
-  border: 1px solid currentColor;
+  border: 2px solid currentColor;
   border-radius: 5px;
   transform: translateY(5px);
 }
@@ -65,8 +65,8 @@ input[type='checkbox']::before {
   display: block;
   width: 0.65em;
   height: 0.65em;
-  right: 4px;
-  top: 4px;
+  right: 3px;
+  top: 3px;
   transform: scale(0);
   transition: 120ms transform ease-in-out;
   box-shadow: inset 10px 10px var(--primary-color);
@@ -85,6 +85,10 @@ input[type='checkbox']:checked::before {
   margin: 15px auto 0;
   border-radius: 8px;
   font-size: 1.2rem;
+}
+
+.open-form:hover {
+  box-shadow: var(--primary-color) 2px 2px;
 }
 
 .book-form-container {
@@ -139,6 +143,23 @@ input[type='checkbox']:checked::before {
   margin: 15px 0;
 }
 
+.book-form li:nth-of-type(5) {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.book-form li:nth-of-type(5) label:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+#read {
+  margin-left: 5px;
+}
+
 .book-form label {
   font-weight: 600;
 }
@@ -179,7 +200,21 @@ input[type='checkbox']:checked::before {
   margin: 40px;
 }
 
+.yes {
+  background-color: var(--secondary-color-light);
+}
+
+.no {
+  background-image: linear-gradient(
+    320deg,
+    #757575 0%,
+    hsl(0deg 0% 67%) 50%,
+    hsl(0deg 0% 88%) 100%
+  );
+}
+
 .book-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -192,18 +227,47 @@ input[type='checkbox']:checked::before {
   );
   border-radius: 8px;
   height: 400px;
+  border: 2px solid var(--text-color);
+  transition: 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.book-card:hover {
+  box-shadow: var(--secondary-color-dark) 5px 5px 0px 0px;
+  transform: scale(1.05);
+  transition-duration: 0.5s;
+}
+
+.button-remove {
+  position: absolute;
+  color: var(--secondary-color-dark);
+  right: 5px;
+  top: 5px;
+  width: 32px;
+}
+
+.button-remove svg:hover {
+  color: var(--text-color);
+  animation: rotate 1s;
+}
+
+@keyframes rotate {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: 180deg;
+  }
 }
 
 .book-title {
-  margin: 30px;
+  text-align: center;
+  margin: 20px;
 }
 
 .book-details {
   text-align: center;
 }
 
-/* @media only screen and (max-width: 400px) {
-  form {
-    width: 100%;
-  }
-} */
+.book-details li {
+  margin: 10px 0;
+}
