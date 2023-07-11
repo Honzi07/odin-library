@@ -69,10 +69,14 @@ function renderBook() {
             <span>
             ${el.read ? 'I already read it' : 'I need to read it'}
             </span>
+            </li>
+            <li class="book-details-checkbox">
+            <label for="read">Change read status</label>
             <input type="checkbox" name="read" class="toggle-read-status" ${
               el.read ? 'checked' : ''
-            }/>
-            </li>
+            }
+            />
+          </li>
           </ul>
         </div>
     `;
