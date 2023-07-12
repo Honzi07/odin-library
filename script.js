@@ -25,7 +25,6 @@ function createBook(e) {
 
   const book = new Book(title, author, +pages, comment, read);
   myLibrary.push(book);
-  console.log(...myLibrary);
   renderBook();
 }
 bookForm.addEventListener('submit', createBook);
@@ -36,7 +35,6 @@ Book.prototype.toggleReadStatus = function () {
 
 function renderBook() {
   const lastBook = myLibrary.slice(-1);
-  console.log(...lastBook);
 
   const bookCard = document.createElement('div');
   bookCard.classList.add('book-card');
@@ -114,16 +112,13 @@ function readStatus(e) {
   }
 
   book.toggleReadStatus();
-  console.log(book.read, span);
 }
 
 function removeBook(e) {
   const bookCard = getTargetElement(e);
   const bookIndex = bookCard.dataset.index;
 
-  console.log(bookIndex);
   myLibrary.splice(bookIndex, 1);
-  console.log(myLibrary);
   bookCard.remove();
 
   dataIndex = 0;
