@@ -156,7 +156,7 @@ input[type='checkbox']:checked::before {
 
 .book-form li {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   margin: 15px 0;
 }
 
@@ -193,20 +193,24 @@ input[type='checkbox']:checked::before {
   background-color: var(--secondary-color-light);
 }
 
-#title + span {
+.book-form label {
   position: relative;
 }
 
-#title:invalid + span::before {
+.book-form input:invalid + label::before {
   position: absolute;
-  right: 0px;
-  bottom: 40px;
+  right: 0;
+  top: 5px;
   content: 'required';
   font-size: 0.8rem;
 }
 
-#title:invalid {
+.book-form input:invalid:focus {
   border-color: #bf0000;
+}
+
+.book-form input:valid:focus {
+  background-color: var(--bg-color);
 }
 
 .book-container {
