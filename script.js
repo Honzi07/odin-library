@@ -27,7 +27,6 @@ function createBook(e) {
   myLibrary.push(book);
   renderBook();
 }
-bookForm.addEventListener('submit', createBook);
 
 Book.prototype.toggleReadStatus = function () {
   this.read = !this.read;
@@ -153,4 +152,10 @@ window.addEventListener('click', function (e) {
   if (e.target === bookFormContainer) {
     bookFormContainer.style.display = 'none';
   }
+});
+
+bookForm.addEventListener('submit', function (e) {
+  createBook(e);
+  bookFormContainer.style.display = 'none';
+  bookForm.reset();
 });
